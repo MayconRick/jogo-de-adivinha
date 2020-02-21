@@ -1,20 +1,74 @@
-puts "Bem-vindo ao jogo da adivinhacao"
-puts "Qual e o seu nome?" 
-nome = gets
-puts "\n\n\n\n"
-puts "Comecaremos o jogo para voce, " + nome
-puts "Escolhendo um numero secreto entre 0 e 200..."
-numero_secreto = 121
-puts "Escolhido... que tal adivinhar hoje o nosso numero secreto?"
-puts "\n\n\n"
+def getName()
+    puts "Qual e o seu nome?" 
+    name = gets
+    return name
+end
 
-$initial = 0
-$numerotentativa = 3
-while $initial < $numerotentativa  do
+def shotOfUser() 
+   
     puts("Tentativa #$numerotentativa" )
     puts "Entre com o numero"
-    chute = gets
-    puts "Sera que acertou? Voce chutou " + chute
-    puts numero_secreto == chute.to_i
-    $initial +=1
- end
+    shotUser = gets
+end
+     
+def getRandomNumber()
+    puts "Escolhendo um numero secreto entre 1 e 10..."
+    puts "Escolhido... que tal adivinhar hoje o nosso numero secreto?"
+    rand(1..10)
+end 
+
+def newGame()
+    puts "Você quer Jogr novamente?\n"
+    puts "digite 1 - Sim"
+    puts "digite 2 - Não"
+    answer = gets
+
+    if answer.to_i == 1
+        startGame()
+    else
+        exitGame()
+    end
+    
+end
+
+def finishGame()
+    puts "Prabéns você ganhou...\n\n\n"
+    newGame()
+
+end
+
+def exitGame()
+    puts "Saindo..."
+    exit(true)
+end
+
+def startGame() 
+    $initial = 0
+    $tryNumber = 3
+    puts "Bem-vindo ao jogo da adivinhacao"
+    
+    name = getName()
+    puts "Comecaremos o jogo para voce, " + name
+
+    secretNumber = getRandomNumber()
+    puts "\n\n\n"
+
+    while $initial < $tryNumber  do
+
+        tryUser = shotOfUser()
+        puts "Sera que acertou? Voce chutou " + tryUser
+
+        if tryUser.to_i == secretNumber
+            finishGame()
+        else
+            $initial +=1
+        end
+    end
+
+    newGame()
+
+end
+    
+
+startGame()
+
